@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid AI Email Defender</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Hybrid AI Email <span>Defender</span></h1>
+            <p>Adaptive, Robust, and Explainable Spam & Phishing Detection via RATI & AGCAF.</p>
+        </header>
+
+        <main class="dashboard">
+            <!-- Input Section -->
+            <section class="glass-panel input-section">
+                <h2>Email Payload</h2>
+                <form id="analysis-form">
+                    <div class="form-group">
+                        <label for="emailText">Email Body Text</label>
+                        <textarea id="emailText" rows="6" placeholder="Paste the suspicious email content here..." required></textarea>
+                    </div>
+
+                    <h3>Metadata Features</h3>
+                    <div class="metadata-grid">
+                        <div class="form-group">
+                            <label for="urlLength">Avg URL Length</label>
+                            <input type="number" id="urlLength" value="0.0" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subdomainCount">Max Subdomain Count</label>
+                            <input type="number" id="subdomainCount" value="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senderRep">Sender Reputation (0.0 - 1.0)</label>
+                            <input type="number" id="senderRep" value="0.8" step="0.1" min="0" max="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipientCount">Recipient Count</label>
+                            <input type="number" id="recipientCount" value="1" required>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="httpsPresence" checked>
+                            <label for="httpsPresence">HTTPS Predominant</label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="spfFailure">
+                            <label for="spfFailure">SPF/DKIM Failed</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="primary-btn" id="analyzeBtn">
+                        <span class="btn-text">Analyze Threat</span>
+                        <div class="spinner hidden"></div>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Results Section -->
+            <section class="glass-panel results-section hidden" id="resultsPanel">
+                <div class="result-header">
+                    <h2>Analysis Results</h2>
+                    <div class="badge" id="classificationBadge">Safe</div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <h4>Epistemic Uncertainty</h4>
+                        <div class="score-value" id="uncertaintyScore">0.00</div>
+                        <div class="human-review-flag hidden" id="humanReviewFlag">
+                            ⚠️ Requires SOC Analyst Review (Zero-Day detected)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <h3>Class Probabilities</h3>
+                        <div class="bar-chart" id="probChart">
+                            <!-- Filled dynamically -->
+                        </div>
+                    </div>
+                    
+                    <div class="chart-box">
+                        <h3>AGCAF Gating Weights</h3>
+                        <p class="chart-desc">How much the model trusted each branch.</p>
+                        <div class="bar-chart" id="gatingChart">
+                            <!-- Filled dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="xai-container">
+                    <h3>Explainable AI Breakdown</h3>
+                    <div class="xai-list" id="xaiList">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
