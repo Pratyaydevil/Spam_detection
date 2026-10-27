@@ -33,6 +33,8 @@ Thumbs.db
 *.pt
 *.pth
 *.safetensors
+*.joblib
+data/raw/
 
 # Task file
 task.md

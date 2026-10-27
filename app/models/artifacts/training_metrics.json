@@ -1,0 +1,96 @@
+{
+  "dataset_sources": {
+    "enron_spam": {
+      "url": "https://huggingface.co/datasets/adamlouly/enron_spam_data/resolve/099c1b164c1ef9ff0e7986bfb8f1b33d3ff8596a/train.csv",
+      "license": "Apache-2.0",
+      "mapping": {
+        "0": "Ham",
+        "1": "Spam"
+      }
+    },
+    "phishing_email": {
+      "url": "https://huggingface.co/datasets/zefang-liu/phishing-email-dataset/resolve/34085a032c123ca237f314a01a67909cdea35e34/Phishing_Email.csv",
+      "license": "LGPL-3.0",
+      "mapping": {
+        "Safe Email": "Ham",
+        "Phishing Email": "Phishing"
+      }
+    }
+  },
+  "sample_count_after_deduplication": 43831,
+  "class_counts": {
+    "Ham": 24313,
+    "Phishing": 6527,
+    "Spam": 12991
+  },
+  "split_counts": {
+    "train": 30681,
+    "validation": 6575,
+    "test": 6575
+  },
+  "validation": {
+    "accuracy": 0.9885931558935361,
+    "macro_f1": 0.9870978355781105
+  },
+  "test": {
+    "accuracy": 0.987680608365019,
+    "macro_f1": 0.9853419999243477,
+    "classification_report": {
+      "Ham": {
+        "precision": 0.9922907488986784,
+        "recall": 0.9882094872497944,
+        "f1-score": 0.9902459129001236,
+        "support": 3647.0
+      },
+      "Phishing": {
+        "precision": 0.9775510204081632,
+        "recall": 0.9785495403472931,
+        "f1-score": 0.9780500255232262,
+        "support": 979.0
+      },
+      "Spam": {
+        "precision": 0.9842078451349975,
+        "recall": 0.991277578245254,
+        "f1-score": 0.9877300613496932,
+        "support": 1949.0
+      },
+      "accuracy": 0.987680608365019,
+      "macro avg": {
+        "precision": 0.9846832048139463,
+        "recall": 0.9860122019474472,
+        "f1-score": 0.9853419999243477,
+        "support": 6575.0
+      },
+      "weighted avg": {
+        "precision": 0.9877000608944764,
+        "recall": 0.987680608365019,
+        "f1-score": 0.9876842142820595,
+        "support": 6575.0
+      }
+    },
+    "confusion_matrix_labels": [
+      "Ham",
+      "Phishing",
+      "Spam"
+    ],
+    "confusion_matrix": [
+      [
+        3604,
+        21,
+        22
+      ],
+      [
+        12,
+        958,
+        9
+      ],
+      [
+        16,
+        1,
+        1932
+      ]
+    ]
+  },
+  "model": "TF-IDF word and character n-grams with SGDClassifier",
+  "warning": "Metrics are for these source datasets only; they do not guarantee performance on current real-world email."
+}

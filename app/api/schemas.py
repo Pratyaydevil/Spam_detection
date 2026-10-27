@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Any
 
 class EmailRequest(BaseModel):
     text: str = Field(..., description="The raw email body text")
@@ -18,7 +18,9 @@ class XAIExplanation(BaseModel):
 class AnalysisResponse(BaseModel):
     classification: str = Field(..., description="Ham, Spam, or Phishing")
     probabilities: Dict[str, float] = Field(..., description="Probabilities for each class")
-    epistemic_uncertainty: float = Field(..., description="Uncertainty score (higher means model is guessing)")
+    epistemic_uncertainty: float = Field(..., description="One minus the highest predicted class probability; not calibrated epistemic uncertainty")
     requires_human_review: bool = Field(..., description="True if epistemic_uncertainty > threshold")
     gating_weights: Dict[str, float] = Field(..., description="How much the model trusted Text vs Metadata vs RATI")
     xai_breakdown: List[XAIExplanation] = Field(..., description="Explanation of features driving the decision")
+    baseline_comparison: Optional[Dict[str, Any]] = Field(None, description="Comparative baseline model evaluation for this sample")
+    analysis_mode: str = Field(..., description="Inference mode used to produce this result")

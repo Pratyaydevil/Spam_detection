@@ -1,4 +1,30 @@
-# End-to-End Project Description: A Hybrid Machine Learning and Deep Neural Network Framework for Adaptive, Robust, and Explainable Spam and Phishing Email Detection
+# Email Spam and Phishing Classifier: Proposed Architecture and Current Implementation
+
+> **Implementation status:** Sections 1–6 below describe the original proposed
+> Hybrid ML-DNN research architecture; they are not the model currently used by
+> the API. The working inference path is a text-only TF-IDF word/character
+> n-gram classifier trained with SGD. It does not use the proposed DistilBERT,
+> AGCAF, SCAR, evidential head, sender metadata, or threat-intelligence
+> components.
+
+## Current Trained Classifier
+
+Run `python -m app.training.train_email_classifier` to download the pinned
+public data sources, remove exact normalized-text duplicates, create
+stratified train/validation/test splits, train the classifier, and save its
+local model and evaluation report under `app/models/artifacts/`.
+
+The training script combines the [Enron Spam Email dataset](https://huggingface.co/datasets/adamlouly/enron_spam_data)
+(dataset card declares Apache-2.0; labels `0` = Ham and `1` = Spam) and the
+[Phishing Email dataset](https://huggingface.co/datasets/zefang-liu/phishing-email-dataset)
+(dataset card declares LGPL-3.0; Safe Email = Ham and Phishing Email = Phishing).
+The generated report records exact source revisions and evaluation metrics.
+
+The current held-out test split contains 6,575 emails and achieved 98.77%
+accuracy and 98.53% macro-F1 on the combined source datasets. These figures
+measure this test split only and do not establish real-world or future-email
+performance. Model probabilities and derived uncertainty are not calibrated;
+predictions are advisory.
 
 ## 1. Executive Summary & Problem Statement
 Modern spam and phishing attacks increasingly bypass traditional email filters using three primary evasion techniques: **metadata spoofing** (faking sender identities or hiding URLs), **text obfuscation** (inserting zero-width spaces or substituting characters like `p@ssword`), and **zero-day exploits** (entirely novel social engineering patterns). 
